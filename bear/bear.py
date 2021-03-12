@@ -505,6 +505,10 @@ def parse_args_for_intercept_build():
 def create_intercept_parser():
     """ Creates a parser for command-line arguments to 'intercept'. """
 
+    libear_path = "@DEFAULT_PRELOAD_FILE@"
+    if not os.path.isfile(libear_path):
+        libear_path = os.getenv("HOME") + "/bear/lib64/bear/libear.so"
+
     parser = argparse.ArgumentParser(
         formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 
@@ -582,7 +586,7 @@ def create_intercept_parser():
     advanced.add_argument(
         '--libear', '-l',
         dest='libear',
-        default="@DEFAULT_PRELOAD_FILE@",
+        default=libear_path,
         action='store',
         help="""specify libear file location.""")
 
